@@ -1,0 +1,140 @@
+@import "tailwindcss";
+@import "aos/dist/aos.css";
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+
+@theme {
+  --color-background: #1A1A1A;
+  --color-foreground: #F5F0E8;
+  --color-bills: #00338D;
+  --color-amber: #D4A017;
+  --color-amber-bright: #F5A623;
+  --color-brick: #8B2500;
+  --color-muted: #A89F8C;
+
+  --font-headline: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-typewriter: typewriter 1.5s steps(40, end);
+  --animate-blink: blink 0.75s step-end infinite;
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  @keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: #D4A017; }
+  }
+}
+
+:root {
+  --background: #1A1A1A;
+  --foreground: #F5F0E8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1A1A1A;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4A017;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F5A623;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+/* Typewriter Effect */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #D4A017;
+  width: 0;
+}
+.typewriter.active {
+  animation: typewriter 1.5s steps(40, end) forwards, blink 0.75s step-end 3 forwards;
+}
+
+/* Star Divider growth */
+.divider-grow {
+  height: 0;
+  transition: height 0.6s ease-out;
+}
+.divider-grow.active {
+  height: 100%;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile specific animation adjustments */
+@media (max-width: 768px) {
+  [data-aos] {
+    transition-duration: 400ms !important;
+  }
+  [data-aos="fade-up"] {
+    transform: translateY(15px);
+  }
+  [data-aos="fade-left"] {
+    transform: translateX(-20px);
+  }
+  [data-aos="fade-right"] {
+    transform: translateX(20px);
+  }
+}
+
+/* Ripple effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background-color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
